@@ -1,3 +1,6 @@
+# Github's standard python exclusions
+#####################################
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -128,3 +131,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Personal exclusoin
+####################################
+
+# Emacs
+\#*\#
