@@ -3,4 +3,4 @@
 
 from models import Db
 
-database=Db()
+database = Db()

@@ -1,7 +1,3 @@
--------------------------------------------
---SQL commands to create tables in the DB--
--------------------------------------------
-
 CREATE TABLE category (
                 id INT AUTO_INCREMENT NOT NULL,
                 nom VARCHAR(150) NOT NULL,
