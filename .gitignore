@@ -132,7 +132,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Personal exclusoin
+# Personal exclusions
 ####################################
 
 # Emacs

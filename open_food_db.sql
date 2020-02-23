@@ -1,10 +1,9 @@
+
 CREATE TABLE category (
                 id INT AUTO_INCREMENT NOT NULL,
                 nom VARCHAR(150) NOT NULL,
                 PRIMARY KEY (id)
 )ENGINE=InnoDB;
-
-
 CREATE TABLE product (
                 id INT AUTO_INCREMENT NOT NULL,
                 name VARCHAR(150) NOT NULL,
@@ -13,7 +12,6 @@ CREATE TABLE product (
                 category_id INT NOT NULL,
                 PRIMARY KEY (id)
 )ENGINE=InnoDB;
-
 
 ALTER TABLE product ADD CONSTRAINT category_product_fk
 FOREIGN KEY (category_id)

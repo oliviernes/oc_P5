@@ -53,17 +53,26 @@ class Db:
         # ~ Open cursor linked to DB (self)
         connection = self.cnx
         cursor = connection.cursor()
-
-        print("Creating tables")
-
+                
+        length=len(sql_list)
+        n=0
+        
         for sql_command in sql_list:
+            n+=1    
             try:
-                cursor.execute(sql_command + ";")
-                print(sql_command[0:20])
+                table=""
+                for letter in sql_command[13:]:
+                     table+=letter
+                     if table[-2:]==" (":
+                          table=table[:-2]
+                          break
+                if n<length:
+                     print(f'Creating table:{table} -', end='')
+                cursor.execute(sql_command + ";")       
             except mysql.connector.Error as err:
                 if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
-                    print("Table Already exists.")
+                    print("Table already exists.")
                 else:
                     print(err.msg)
             else:
-                print("Table created")
+                print("OK")
