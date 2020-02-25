@@ -4,5 +4,6 @@ DB_CONF = {
     "user": "off_user",
     "password": "XXX",
     "db": "off_base",
-    "raise_on_warnings": True,
+	"autocommit": True,
+    "file": "open_food_db.sql"
 }
