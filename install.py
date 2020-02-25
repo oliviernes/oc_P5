@@ -9,3 +9,5 @@ import models
 db = models.Db()
 
 db.create_tables()
+
+db.input_data(db)

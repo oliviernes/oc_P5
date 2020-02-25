@@ -108,6 +108,7 @@ celerybeat.pid
 .env
 .venv
 .venvoc_P5
+.venvoc_P5pymysql
 env/
 venv/
 ENV/

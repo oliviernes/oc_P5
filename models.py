@@ -35,8 +35,7 @@ class Db:
             "user": DB_CONF["user"],
             "password": DB_CONF["password"],
             "database": DB_CONF["db"],
-            "autocommit": True,
-            "use_pure": True,
+            "autocommit": DB_CONF["autocommit"],
         }
 
         try:
