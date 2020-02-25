@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
+    #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import mysql.connector
 from mysql.connector import errorcode
 import requests
-
+import json
 # ~ import pdb
 from config import DB_CONF
 
@@ -35,6 +35,8 @@ class Db:
             "user": DB_CONF["user"],
             "password": DB_CONF["password"],
             "database": DB_CONF["db"],
+            "autocommit": True,
+            "use_pure": True,
         }
 
         try:
@@ -64,7 +66,6 @@ class Db:
         """Initialize the database"""
 
         sql_list = self.make_sql_list()
-
         # ~ Open cursor linked to DB (self)
         connection = self.cnx
         cursor = connection.cursor()
@@ -83,6 +84,7 @@ class Db:
                           break
                 if n<length:
                      print(f'Creating table:{table} -', end='')
+                print(sql_command + ";")
                 cursor.execute(sql_command + ";")       
             except mysql.connector.Error as err:
                 if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
@@ -91,3 +93,85 @@ class Db:
                     print(err.msg)
             else:
                 print("OK")
+        
+        #~ cursor.close()
+    
+
+    def input_data(self, db):
+
+        search_param = {
+            "search_terms": ", biscuits,",
+            "search_tag": "categories_tag",
+            "page_size": 10,
+            "json": 1,
+            "page": 1,
+        }
+
+        API_URL = "https://fr-en.openfoodfacts.org/cgi/search.pl?"
+        products = []
+        # initialize to page 1 of search result
+        page = 1
+        req = requests.get(API_URL, params=search_param)
+
+        # output of request as a json file
+        req_output = req.json()
+        # list of product of the output
+        products_output = req_output["products"]
+        # store product classes
+        # ~ for product in products_output:
+        # ~ products.append(Product_API(product))
+
+        prod0 = products_output[0]
+
+        prod_reduit = {}
+        cat_stage = {}
+
+        prod_reduit["name"] = prod0["product_name_fr"]
+        prod_reduit["nutrition_grades"] = prod0["nutrition_grades"]
+        prod_reduit["energy_100"] = prod0["nutriments"]["energy_100g"]
+
+        cat_stage["name"] = "biscuits"
+
+        prod_names = []
+
+        for prod in products_output:
+            prod_names.append(prod["product_name_fr"])
+
+        #########################
+
+        sql_list = []
+        insert_cat = """INSERT INTO category (`name`) VALUES ('{}');"""
+        insert_prod = """INSERT INTO product (`name`, `nutrition_grades`, `energy_100`, `category_id`) \
+        SELECT "{name}", "{nutrition_grades}", "{energy_100}", id AS category_id \
+        FROM category \
+        WHERE name = "{cat}";"""
+
+        # insert category
+        sql_list.append(insert_cat.format("biscuits",))
+
+        # insert products
+        for idx, val in enumerate(req_output["products"]):
+            sql_list.append(
+                insert_prod.format(
+                    name=val["product_name_fr"],
+                    nutrition_grades=val["nutrition_grades"],
+                    energy_100=val["nutriments"]["energy_100g"],
+                    cat="biscuits",
+                )
+            )
+
+        # ~ db = models.Db()
+
+        connection = db.cnx
+        cursor = connection.cursor()
+
+        # ~ print(sql_list)
+
+        try:
+            for command in sql_list:
+                print(command)
+                cursor.execute(command)
+            cursor.close()
+        except mysql.connector.Error as error:
+            print(f"Failed to insert record to MySQL table: {error}")
+            print(error)
