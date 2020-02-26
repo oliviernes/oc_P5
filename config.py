@@ -8,10 +8,13 @@ DB_CONF = {
     "file": "open_food_db.sql",
 }
 
-CATEGORIES = {
+#API
+CATEGORIES = [
 	"Biscuits",
 	"Yaourts",
 	"Pâtisseries",
 	"Glaces",
 	"Tartes",
-}
+]
+
+API_URL = "https://fr-en.openfoodfacts.org/cgi/search.pl?"
