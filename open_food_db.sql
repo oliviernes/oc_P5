@@ -8,7 +8,7 @@ CREATE TABLE product (
                 id INT AUTO_INCREMENT NOT NULL,
                 name VARCHAR(150) NOT NULL,
                 nutrition_grades VARCHAR(1) NOT NULL,
-                energy_100 DECIMAL(6,2) NOT NULL,
+                energy_100 SMALLINT NOT NULL,
                 category_id INT NOT NULL,
                 PRIMARY KEY (id)
 );
