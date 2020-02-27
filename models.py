@@ -119,7 +119,7 @@ class Category:
     def parameters(self, page):
 
         search_param = {
-            "search_terms": "Tartes",
+            "search_terms": self.name,
             "search_tag": "categories_tag",
             "sort_by": "unique_scans_n",
             "page_size": 10,
@@ -140,28 +140,30 @@ class Category:
         req_output = req.json()
         # list of product of the output
         products_output = req_output["products"]
-
+        
         sql_list = []
         insert_cat = "INSERT INTO category (`name`) VALUES ('{}');"
         insert_prod = """INSERT INTO product (`name`, \
         `nutrition_grades`, `energy_100`, `category_id`) \
         SELECT "{name}", "{nutrition_grades}", "{energy_100}", \
         id AS category_id FROM category WHERE name = "{cat}";"""
-
+        
+        params=self.parameters(page)
         # insert category
-        sql_list.append(insert_cat.format("biscuits",))
-
+        sql_list.append(insert_cat.format(params["search_terms"]))
+        
         # insert products
-        for val in req_output["products"]:
+        
+        for prod in req_output["products"]:
             sql_list.append(
                 insert_prod.format(
-                    name=val["product_name_fr"],
-                    nutrition_grades=val["nutrition_grades"],
-                    energy_100=val["nutriments"]["energy_100g"],
-                    cat="biscuits",
+                    name=prod.get("product_name_fr", ""),
+                    nutrition_grades=prod.get("nutrition_grades", ""),
+                    energy_100=prod["nutriments"]["energy_100g"],
+                    cat=params["search_terms"],
                 )
             )
-
+            
         connection = db.cnx
         cursor = connection.cursor()
 
