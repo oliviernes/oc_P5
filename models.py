@@ -5,7 +5,6 @@ import mysql.connector
 from mysql.connector import errorcode
 import requests
 import json
-# ~ import pdb
 from config import DB_CONF, API_URL
 
 ################
@@ -26,7 +25,8 @@ class Db:
         >>> DB_CONF['user'] = 'off_user'
         >>> DB_CONF['db'] = 'foobar'
         >>> Db.__init__(Db)
-        1044 (42000): Access denied for user 'off_user'@'localhost' to database 'foobar'
+        1044 (42000): Access denied for user 'off_user'@'localhost' to \
+database 'foobar'
         """
 
 
@@ -83,7 +83,7 @@ class Db:
                           break
                 if n<length:
                      print(f'Creating table:{table} -', end='')
-                print(sql_command + ";")
+                #~ print(sql_command + ";")
                 cursor.execute(sql_command + ";")       
             except mysql.connector.Error as err:
                 if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
@@ -105,6 +105,24 @@ class Db:
         connection.commit()
         cursor.close()
 
+    def get_infos_category(self):
+        """ Get infos from the category table """
+        
+        sql_select_Query = "select * from category"
+        connection=self.cnx
+        cursor = connection.cursor()
+        cursor.execute(sql_select_Query)
+        self.records = cursor.fetchall()
+        
+    def get_infos_product(self, choice):
+        """ Get infos from the category table """
+        
+        sql_select_Query = f"select * from product where category_id=\
+        {choice}"
+        connection=self.cnx
+        cursor = connection.cursor()
+        cursor.execute(sql_select_Query)
+        self.records = cursor.fetchall()
 
 ###########################
 #       Category          #
@@ -131,7 +149,6 @@ class Category:
         
     def input_data(self, db):    
     
-        products = []
         # initialize to page 1 of search result
         page = 1
         req = requests.get(API_URL, params=self.parameters(page))
@@ -149,6 +166,7 @@ class Category:
         id AS category_id FROM category WHERE name = "{cat}";"""
         
         params=self.parameters(page)
+
         # insert category
         sql_list.append(insert_cat.format(params["search_terms"]))
         
@@ -169,7 +187,7 @@ class Category:
 
         try:
             for command in sql_list:
-                print(command)
+                #~ print(command)
                 cursor.execute(command)
             cursor.close()
         except mysql.connector.Error as error:
