@@ -112,7 +112,8 @@ database 'foobar'
         connection=self.cnx
         cursor = connection.cursor()
         cursor.execute(sql_select_Query)
-        self.records = cursor.fetchall()
+        self.records_cat = cursor.fetchall()
+        return self.records_cat
         
     def get_infos_product(self, choice):
         """ Get infos from the category table """
@@ -122,7 +123,8 @@ database 'foobar'
         connection=self.cnx
         cursor = connection.cursor()
         cursor.execute(sql_select_Query)
-        self.records = cursor.fetchall()
+        self.records_prod = cursor.fetchall()
+        return self.records_prod
 
 ###########################
 #       Category          #
