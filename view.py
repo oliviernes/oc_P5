@@ -47,9 +47,12 @@ def display_products(pick, records_prod):
         print("\nNo healthier product available. However, you can \
 choose a product with more or less energy:\n")
     else:
-        print("\nHere is a list of healthier products:\n")
+        print("\nHere is a list of healthier products (sorted by their\
+ energy value in kj per 100g or 100mL:\n")
 
-    for idx, val in enumerate(records_prod):
+    sorted_by_nrj=sorted(records_prod, key=lambda tup: tup[3])
+
+    for idx, val in enumerate(sorted_by_nrj):
         if val[0] in selected:
             for i in range(4):
                 print(val[i], " ", end="")
