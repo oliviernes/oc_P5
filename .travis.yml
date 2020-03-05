@@ -1,0 +1,23 @@
+language: python
+python:
+    - "3.7"
+# command to install dependencies
+
+install:
+
+- pip install -r requirements.txt
+
+addons:
+    mariadb: '10.0.38-MariaDB-0ubuntu0.16.04.1'
+
+# safelist
+branches:
+    only:
+        - cli
+
+# command to run tests
+
+script:
+
+- pytest
+
