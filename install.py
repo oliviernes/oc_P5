@@ -16,5 +16,5 @@ db.drop_table("category")
 db.create_tables()
 
 for cat in CATEGORIES:
-    categorie=models.Category(cat)
+    categorie = models.Category(cat)
     categorie.input_data(db)
