@@ -6,6 +6,7 @@ python:
 install:
 
 - pip install -r requirements.txt
+- pip install -r requirements-dev.txt
 
 addons:
     mariadb: '10.0.38-MariaDB-0ubuntu0.16.04.1'
