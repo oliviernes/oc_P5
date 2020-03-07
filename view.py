@@ -24,8 +24,9 @@ def display_category_product(pick, records_cat, records_prod):
 
     print("\nYou chose the category", records_cat[int(pick) - 1][1], ":\n")
 
+    """Cleaning of the product's list:"""
     for idx, val in enumerate(records_prod):
-        """if sentences to display only products with full data"""
+        """if sentence to display only products with full data"""
         if "" in val:
             del records_prod[idx]
 
@@ -59,9 +60,9 @@ choose a product with more or less energy:\n"
  energy value in kj per 100g or 100mL:\n"
         )
 
-    sorted_by_nrj = sorted(records_prod, key=lambda tup: tup[3])
+    sorted_by_energy = sorted(records_prod, key=lambda tup: tup[3])
 
-    for idx, val in enumerate(sorted_by_nrj):
+    for idx, val in enumerate(sorted_by_energy):
         if val[0] in selected:
             for i in range(4):
                 print(val[i], " ", end="")
