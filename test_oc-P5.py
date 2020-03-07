@@ -28,23 +28,27 @@ def test_connexion2():
         'off_user'@'localhost' to database 'foobar'"
         )
 
+
 def test_get_infos_category():
-    DB_CONF["db"]="off_base"
-    Db.__init__(Db)
-    rec_cat=Db.get_infos_category(Db)
-    
+    DB_CONF["db"] = "off_base"
+    database = Db()
+    rec_cat = database.get_infos_category()
+
     assert rec_cat[1][1] == "Yaourts"
 
+
 def test_get_infos_product():
-    rec_prod=Db.get_infos_product(Db, 2)
+    database = Db()
+    rec_prod = database.get_infos_product(2)
     for prod in rec_prod:
-        assert prod[4]==2
+        assert prod[4] == 2
+
 
 def test_cleaning_product():
-    rec_cat=Db.get_infos_category(Db)
-    rec_prod=Db.get_infos_product(Db, 3)                        
+    database = Db()
+    rec_cat = database.get_infos_category()
+    rec_prod = database.get_infos_product(3)
     view.display_category_product(3, rec_cat, rec_prod)
     for val in rec_prod:
         for col in val:
             assert col != ""
-
