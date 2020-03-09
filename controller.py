@@ -23,7 +23,7 @@ def check_input(question, records):
 				break;
 			elif val>0 and val not in select:
 				num=input("Input must be one of the index displayed.\
-Try again.")
+	Try again.")
 			else:
 				num=input("Input must be a positive integer.\
  Try again: ")
@@ -55,7 +55,7 @@ def cli():
 		
     records_prod = database.get_infos_product(choice)
 
-    view.display_category_product(choice, records_cat, records_prod)
+    records_prod=view.display_category_product(choice, records_cat, records_prod)
 
     choice=check_input("\nChoose the index of one of the products: "\
     , records_prod)

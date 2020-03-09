@@ -26,19 +26,12 @@ def display_category_product(pick, records_cat, records_prod):
     print("\nYou chose the category", records_cat[pick - 1][1], ":\n")
 
     """Cleaning of the product's list:"""
-    not_clean=True
-    while not_clean:
-        for idx, val in enumerate(records_prod):
-            """if sentence to display only products with full data"""
-            if "" in val:
-                del records_prod[idx]
-        not_clean=False
-        for val in records_prod:
-            if "" in val:
-                not_clean=True
+    records_prod=[prod for prod in records_prod if all(prod)]
        
     for row in records_prod:
         print(row[0], ":", row[1], "(", row[2], ")")
+
+    return records_prod
         
 def display_products(pick, records_prod):
 
