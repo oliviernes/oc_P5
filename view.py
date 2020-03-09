@@ -82,10 +82,8 @@ choose a product with more or less energy. The list is sorted by \
                         print(Fore.GREEN + str(val[3]), " ", end="")
                         print(Style.RESET_ALL)
             print("\n")
-    
+
     """Remove products not selected:"""
-    while len(records_prod) != len(selected):
-        for val in records_prod:
-            if val[0] not in selected:
-                records_prod.remove(val)
-    
+    records_prod=[prod for prod in records_prod if prod[0] in selected]
+
+    return records_prod

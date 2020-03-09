@@ -62,7 +62,7 @@ def cli():
 
     os.system('clear')
 
-    view.display_products(choice, records_prod)
+    records_prod=view.display_products(choice, records_prod)
 
     choice=check_input("\nChoose the index of a product to substitute:"\
     , records_prod)
