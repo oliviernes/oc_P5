@@ -23,7 +23,7 @@ def display_categories(records):
 def display_category_product(pick, records_cat, records_prod):
     """display products of the category chosen"""
 
-    print("\nYou chose the category", records_cat[int(pick) - 1][1], ":\n")
+    print("\nYou chose the category", records_cat[pick - 1][1], ":\n")
 
     """Cleaning of the product's list:"""
     not_clean=True
@@ -39,14 +39,13 @@ def display_category_product(pick, records_cat, records_prod):
        
     for row in records_prod:
         print(row[0], ":", row[1], "(", row[2], ")")
-
-
+        
 def display_products(pick, records_prod):
 
     selected = []
 
     for idx, val in enumerate(records_prod):
-        if val[0] == int(pick):
+        if val[0] == pick:
             index = idx
 
     for row in records_prod:
