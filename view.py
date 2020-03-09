@@ -26,11 +26,17 @@ def display_category_product(pick, records_cat, records_prod):
     print("\nYou chose the category", records_cat[int(pick) - 1][1], ":\n")
 
     """Cleaning of the product's list:"""
-    for idx, val in enumerate(records_prod):
-        """if sentence to display only products with full data"""
-        if "" in val:
-            del records_prod[idx]
-
+    not_clean=True
+    while not_clean:
+        for idx, val in enumerate(records_prod):
+            """if sentence to display only products with full data"""
+            if "" in val:
+                del records_prod[idx]
+        not_clean=False
+        for val in records_prod:
+            if "" in val:
+                not_clean=True
+       
     for row in records_prod:
         print(row[0], ":", row[1], "(", row[2], ")")
 
@@ -68,6 +74,7 @@ choose a product with more or less energy. The list is sorted by \
 
     selected_energy = records_prod[index][3]
 
+    """Sort products by their energy"""
     sorted_by_energy = sorted(records_prod, key=lambda tup: tup[3])
 
     for idx, val in enumerate(sorted_by_energy):
