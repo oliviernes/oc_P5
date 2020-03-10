@@ -108,7 +108,7 @@ database 'foobar'
 
         connection = self.cnx
         cursor = connection.cursor()
-        query = f"DROP TABLE IF EXISTS `{table}`;"
+        query = f"DROP TABLE IF EXISTS {table};"
         cursor.execute(query)
         connection.commit()
         cursor.close()
