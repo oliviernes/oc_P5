@@ -3,16 +3,16 @@ CREATE TABLE category (
                 id INT AUTO_INCREMENT NOT NULL,
                 name VARCHAR(150) NOT NULL,
                 PRIMARY KEY (id)
-);
+)ENGINE=InnoDB;
 CREATE TABLE product (
                 id INT AUTO_INCREMENT NOT NULL,
                 name VARCHAR(150) NOT NULL,
                 nutrition_grades VARCHAR(1) NOT NULL,
                 energy_100 SMALLINT NOT NULL,
                 category_id INT NOT NULL,
-                subtitute_id INT,
+                substitute_id INT,
                 PRIMARY KEY (id)
-);
+)ENGINE=InnoDB;
 
 
 ALTER TABLE product ADD CONSTRAINT category_product_fk
@@ -22,7 +22,7 @@ ON DELETE CASCADE
 ON UPDATE CASCADE;
 
 ALTER TABLE product ADD CONSTRAINT product_product_fk
-FOREIGN KEY (subtitute_id)
+FOREIGN KEY (substitute_id)
 REFERENCES product (id)
 ON DELETE CASCADE
 ON UPDATE CASCADE;

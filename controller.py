@@ -23,7 +23,7 @@ def check_input(question, records):
 				break;
 			elif val>0 and val not in select:
 				num=input("Input must be one of the index displayed.\
-	Try again.")
+ Try again: ")
 			else:
 				num=input("Input must be a positive integer.\
  Try again: ")
@@ -46,28 +46,26 @@ def cli():
 
     view.display_categories(records_cat)
 
-    #~ choice = input("\nChoose the index of one of the categories: ")
-
     choice=check_input("\nChoose the index of one of the categories: "\
-    , records_cat)
+, records_cat)
 
     os.system('clear')
 		
     records_prod = database.get_infos_product(choice)
 
-    records_prod=view.display_category_product(choice, records_cat, records_prod)
+    records_prod=view.display_category_product(choice, records_cat,\
+ records_prod)
 
-    choice=check_input("\nChoose the index of one of the products: "\
-    , records_prod)
+    choice_prod=check_input("\nChoose the index of one of the products: \
+", records_prod)
 
     os.system('clear')
 
-    records_prod=view.display_products(choice, records_prod)
+    records_prod=view.display_products(choice_prod, records_prod)
 
-    choice=check_input("\nChoose the index of a product to substitute:"\
-    , records_prod)
+    choice_subs=check_input("\nChoose the index of a product to \
+substitute: ", records_prod)
+	
+    database.update_data(choice_prod, choice_subs)
 	
 cli()
-
-		
-	
