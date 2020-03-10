@@ -29,7 +29,6 @@ class Db:
 database 'foobar'
         """
 
-
         con_conf = {
             "host": DB_CONF["host"],
             "user": DB_CONF["user"],
@@ -68,23 +67,23 @@ database 'foobar'
         # ~ Open cursor linked to DB (self)
         connection = self.cnx
         cursor = connection.cursor()
-                
-        length=len(sql_list)
-        n=0
-        
+
+        length = len(sql_list)
+        n = 0
+
         for sql_command in sql_list:
-            n+=1    
+            n += 1
             try:
-                table=""
+                table = ""
                 for letter in sql_command[13:]:
-                     table+=letter
-                     if table[-2:]==" (":
-                          table=table[:-2]
-                          break
-                if n<length:
-                     print(f'Creating table:{table} -', end='')
-                #~ print(sql_command + ";")
-                cursor.execute(sql_command + ";")       
+                    table += letter
+                    if table[-2:] == " (":
+                        table = table[:-2]
+                        break
+                if n < length:
+                    print(f"Creating table:{table} -", end="")
+                # ~ print(sql_command + ";")
+                cursor.execute(sql_command + ";")
             except mysql.connector.Error as err:
                 if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
                     print("Table already exists.")
@@ -92,8 +91,8 @@ database 'foobar'
                     print(err.msg)
             else:
                 print("OK")
-        
-        #~ cursor.close()
+
+        # ~ cursor.close()
 
     def drop_table(self, table):
         """ DROP TABLE Products"""
@@ -107,30 +106,34 @@ database 'foobar'
 
     def get_infos_category(self):
         """ Get infos from the category table """
-        
+
         sql_select_Query = "select * from category"
-        connection=self.cnx
+        connection = self.cnx
         cursor = connection.cursor()
         cursor.execute(sql_select_Query)
-        self.records = cursor.fetchall()
-        
+        self.records_cat = cursor.fetchall()
+        return self.records_cat
+
     def get_infos_product(self, choice):
         """ Get infos from the category table """
-        
+
         sql_select_Query = f"select * from product where category_id=\
         {choice}"
-        connection=self.cnx
+        connection = self.cnx
         cursor = connection.cursor()
         cursor.execute(sql_select_Query)
-        self.records = cursor.fetchall()
+        self.records_prod = cursor.fetchall()
+        return self.records_prod
+
 
 ###########################
 #       Category          #
 ###########################
 
+
 class Category:
     """ Class generating a category"""
-    
+
     def __init__(self, cat_name):
         self.name = cat_name
 
@@ -144,11 +147,11 @@ class Category:
             "json": 1,
             "page": page,
         }
-        
+
         return search_param
-        
-    def input_data(self, db):    
-    
+
+    def input_data(self, db):
+
         # initialize to page 1 of search result
         page = 1
         req = requests.get(API_URL, params=self.parameters(page))
@@ -157,21 +160,21 @@ class Category:
         req_output = req.json()
         # list of product of the output
         products_output = req_output["products"]
-        
+
         sql_list = []
         insert_cat = "INSERT INTO category (`name`) VALUES ('{}');"
         insert_prod = """INSERT INTO product (`name`, \
         `nutrition_grades`, `energy_100`, `category_id`) \
         SELECT "{name}", "{nutrition_grades}", "{energy_100}", \
         id AS category_id FROM category WHERE name = "{cat}";"""
-        
-        params=self.parameters(page)
+
+        params = self.parameters(page)
 
         # insert category
         sql_list.append(insert_cat.format(params["search_terms"]))
-        
+
         # insert products
-        
+
         for prod in req_output["products"]:
             sql_list.append(
                 insert_prod.format(
@@ -181,13 +184,13 @@ class Category:
                     cat=params["search_terms"],
                 )
             )
-            
+
         connection = db.cnx
         cursor = connection.cursor()
 
         try:
             for command in sql_list:
-                #~ print(command)
+                # ~ print(command)
                 cursor.execute(command)
             cursor.close()
         except mysql.connector.Error as error:
