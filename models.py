@@ -80,9 +80,9 @@ database 'foobar'
                     if table[-2:] == " (":
                         table = table[:-2]
                         break
-                if n < length:
+                if n < length-1:
                     print(f"Creating table:{table} -", end="")
-                # ~ print(sql_command + ";")
+
                 cursor.execute(sql_command + ";")
             except mysql.connector.Error as err:
                 if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
@@ -90,9 +90,8 @@ database 'foobar'
                 else:
                     print(err.msg)
             else:
-                print("OK")
-
-        # ~ cursor.close()
+                if n < length-1:
+                    print("OK")
 
     def drop_table(self, table):
         """ DROP TABLE Products"""
