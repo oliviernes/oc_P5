@@ -51,7 +51,7 @@ def display_products(pick, records_prod):
 
     if len(selected) == 0:
         for row in records_prod:
-            if row[2] == records_prod[index][2]:
+            if row[2] == records_prod[index][2] and row[0]!=pick:
                 selected.append(row[0])
         print(
             "\nNo healthier product available. However, you can \
