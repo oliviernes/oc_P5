@@ -71,51 +71,56 @@ interger number. Please, try again: "
 
 def cli():
 
-    substitutes = database.get_substitute()
-
     view.greeting()
 
-    substitution(substitutes)
+    continu=True
 
-    records_cat = database.get_infos_category()
+    while continu:
+                
+        substitutes = database.get_substitute()
 
-    view.display_categories(records_cat)
+        substitution(substitutes)
 
-    choice = check_input("\nChoose the index of one of the categories: ", records_cat)
+        records_cat = database.get_infos_category()
 
-    os.system("clear")
+        view.display_categories(records_cat)
 
-    records_prod = database.get_infos_product(choice)
+        choice = check_input("\nChoose the index of one of the categories:\
+ ", records_cat)
 
-    records_prod = view.display_category_product(choice, records_cat, records_prod)
+        os.system("clear")
 
-    choice_prod = check_input(
-        "\nChoose the index of one of the products: \
+        records_prod = database.get_infos_product(choice)
+
+        records_prod = view.display_category_product(choice, records_cat,\
+     records_prod)
+
+        choice_prod = check_input(
+            "\nChoose the index of one of the products: \
 ",
-        records_prod,
-    )
+            records_prod,
+        )
 
-    os.system("clear")
+        os.system("clear")
+        
+        records_prod = view.display_products(choice_prod, records_prod)
 
-    records_prod = view.display_products(choice_prod, records_prod)
-
-    choice_subs = check_input(
-        "\nChoose the index of a product to \
+        choice_subs = check_input(
+            "\nChoose the index of a product to \
 substitute: ",
-        records_prod,
-    )
+            records_prod,
+        )
 
-    selec = [(1, 1), (2, 2)]
-    choice = check_input(
-        "Do you want to register this substitute in the\
+        selec = [(1, 1), (2, 2)]
+        choice = check_input(
+            "\nDo you want to register this substitute in the\
  database?\n\n1:no\n2:yes\n\nYour answer: ",
-        selec,
-    )
+            selec,
+        )
 
-    if choice == 2:
-        database.update_data(choice_prod, choice_subs)
-    else:
-        pass
-
+        if choice == 2:
+            database.update_data(choice_prod, choice_subs)
+        else:
+            pass
 
 cli()
