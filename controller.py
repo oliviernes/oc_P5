@@ -123,4 +123,14 @@ substitute: ",
         else:
             pass
 
+        choice = check_input(
+            "\nDo you want to search other products?\n\n1:no\n2:yes\n\nYour answer: ",
+            selec,
+        )
+        
+        if choice == 1:
+            break
+        else:
+            pass
+        
 cli()
