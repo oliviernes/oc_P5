@@ -10,7 +10,8 @@ def greeting():
         "Welcome in this app:\n\nThis app help users to look for \
 healthier products."
     )
-    
+
+
 def display_categories(records):
     """display available categories"""
 
@@ -24,17 +25,18 @@ def display_category_product(pick, records_cat, records_prod):
     print("\nYou chose the category", records_cat[pick - 1][1], ":\n")
 
     """Cleaning of the product's list:"""
-    records_prod_dirty=[]
+    records_prod_dirty = []
     for row in records_prod:
         records_prod_dirty.append(row[:4])
-        
-    records_prod=[prod for prod in records_prod_dirty if all(prod)]
-       
+
+    records_prod = [prod for prod in records_prod_dirty if all(prod)]
+
     for row in records_prod:
         print(row[0], ":", row[1], "(", row[2], ")")
 
     return records_prod
-        
+
+
 def display_products(pick, records_prod):
 
     selected = []
@@ -86,6 +88,6 @@ choose a product with more or less energy. The list is sorted by \
             print("\n")
 
     """Remove products not selected:"""
-    records_prod=[prod for prod in records_prod if prod[0] in selected]
+    records_prod = [prod for prod in records_prod if prod[0] in selected]
 
     return records_prod

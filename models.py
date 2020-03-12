@@ -80,7 +80,7 @@ database 'foobar'
                     if table[-2:] == " (":
                         table = table[:-2]
                         break
-                if n < length-1:
+                if n < length - 1:
                     print(f"Creating table:{table} -", end="")
 
                 cursor.execute(sql_command + ";")
@@ -90,19 +90,19 @@ database 'foobar'
                 else:
                     print(err.msg)
             else:
-                if n < length-1:
+                if n < length - 1:
                     print("OK")
 
     def update_data(self, product, substitute):
-        
-        query= f"UPDATE product SET substitute_id={substitute}\
+
+        query = f"UPDATE product SET substitute_id={substitute}\
  WHERE id={product};"
         connection = self.cnx
         cursor = connection.cursor()
         cursor.execute(query)
         connection.commit()
         cursor.close()
-        
+
     def drop_table(self, table):
         """ DROP TABLE Products"""
 
@@ -136,19 +136,20 @@ database 'foobar'
 
     def get_substitute(self):
         """ Get a tuples' list of substitute products"""
-        
+
         sql_select_Query = "select * from product"
         connection = self.cnx
         cursor = connection.cursor()
         cursor.execute(sql_select_Query)
         self.records_prod = cursor.fetchall()
-        self.substitutes=[]
+        self.substitutes = []
         for prod in self.records_prod:
             if prod[5] is not None:
                 self.substitutes.append((prod[0], prod[5]))
-        
+
         return self.substitutes, self.records_prod
-        
+
+
 ###########################
 #       Category          #
 ###########################
