@@ -10,9 +10,7 @@ def greeting():
         "Welcome in this app:\n\nThis app help users to look for \
 healthier products."
     )
-    print("\nHere are the categories available for screening:\n")
-
-
+    
 def display_categories(records):
     """display available categories"""
 

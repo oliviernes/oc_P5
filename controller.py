@@ -7,6 +7,24 @@ from models import Db
 
 database = Db()
 
+def substitution(substitutes):
+    
+    selection=[(1,1),(2,2)]
+    if len(substitutes[0])>0:
+        answer=check_input("\nSome substitutes are available. Do you \
+want to visit them?\n\n1:no\n2:yes\n\nYour answer: ", selection)        
+        if answer==2:
+            print("\nHere are your substitutes: ")
+            for subs in substitutes[0]:
+                for prods in substitutes[1]:
+                    if subs[0]==prods[0]:
+                        prod_name=prods[1]
+                    elif subs[1]==prods[0]:
+                        subs_name=prods[1]
+                print("\n", prod_name, " can be replaced by ", \
+subs_name)
+    print("\nHere are the categories available for screening:\n")
+
 def check_input(question, records):
 	
 	select=[]
@@ -40,7 +58,11 @@ interger number. Please, try again: ")
 	
 def cli():
 
+    substitutes=database.get_substitute()
+        
     view.greeting()
+	
+    substitution(substitutes)
 
     records_cat = database.get_infos_category()
 
@@ -65,7 +87,15 @@ def cli():
 
     choice_subs=check_input("\nChoose the index of a product to \
 substitute: ", records_prod)
-	
-    database.update_data(choice_prod, choice_subs)
+    
+    selec=[(1,1),(2,2)]
+    choice=check_input("Do you want to register this substitute in the\
+ database?\n\n1:no\n2:yes\n\nYour answer: ", selec)    
+
+    if choice==2:        				
+        database.update_data(choice_prod, choice_subs)
+    else:
+        pass
+    
 	
 cli()
