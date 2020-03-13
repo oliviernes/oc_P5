@@ -64,9 +64,21 @@ def test_cleaning_product():
         for col in val:
             assert col != ""
 
+
 def test_display_products():
     database = Db()
-    rec_prod=[(31, 'Ice Tea saveur Pêche', 'd', 82), (32, 'Ice Tea pêche', 'd', 82), (33, 'Thé glacé pêche intense', 'd', 79), (34, 'Thé infusé glacé, Thé noir parfum pêche blanche', 'd', 84), (35, 'Thé vert infusé glacé saveur Menthe', 'd', 84), (36, 'Thé noir évasion pêche & saveur hibiscus', 'd', 79), (37, 'Thé glacé pêche intense', 'd', 79), (38, 'FROSTIES', 'd', 1569), (39, 'Sucre glace', 'd', 1674), (40, 'fuze tea pêche intense (thé glacé)', 'd', 79)]
-    prod_displayed=view.display_products(38, rec_prod)
+    rec_prod = [
+        (31, "Ice Tea saveur Pêche", "d", 82),
+        (32, "Ice Tea pêche", "d", 82),
+        (33, "Thé glacé pêche intense", "d", 79),
+        (34, "Thé infusé glacé, Thé noir parfum pêche blanche", "d", 84),
+        (35, "Thé vert infusé glacé saveur Menthe", "d", 84),
+        (36, "Thé noir évasion pêche & saveur hibiscus", "d", 79),
+        (37, "Thé glacé pêche intense", "d", 79),
+        (38, "FROSTIES", "d", 1569),
+        (39, "Sucre glace", "d", 1674),
+        (40, "fuze tea pêche intense (thé glacé)", "d", 79),
+    ]
+    prod_displayed = view.display_products(38, rec_prod)
     for prod in prod_displayed:
-        assert prod[0]!=38
+        assert prod[0] != 38

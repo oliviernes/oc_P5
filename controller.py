@@ -73,10 +73,10 @@ def cli():
 
     view.greeting()
 
-    continu=True
+    continu = True
 
     while continu:
-                
+
         substitutes = database.get_substitute()
 
         substitution(substitutes)
@@ -85,15 +85,17 @@ def cli():
 
         view.display_categories(records_cat)
 
-        choice = check_input("\nChoose the index of one of the categories:\
- ", records_cat)
+        choice = check_input(
+            "\nChoose the index of one of the categories:\
+ ",
+            records_cat,
+        )
 
         os.system("clear")
 
         records_prod = database.get_infos_product(choice)
 
-        records_prod = view.display_category_product(choice, records_cat,\
-     records_prod)
+        records_prod = view.display_category_product(choice, records_cat, records_prod)
 
         choice_prod = check_input(
             "\nChoose the index of one of the products: \
@@ -102,7 +104,7 @@ def cli():
         )
 
         os.system("clear")
-        
+
         records_prod = view.display_products(choice_prod, records_prod)
 
         choice_subs = check_input(
@@ -127,10 +129,11 @@ substitute: ",
             "\nDo you want to search other products?\n\n1:no\n2:yes\n\nYour answer: ",
             selec,
         )
-        
+
         if choice == 1:
             break
         else:
             pass
-        
+
+
 cli()

@@ -174,19 +174,19 @@ class Category:
         return search_param
 
     def input_data(self, db):
-       
-        # Initialize empty list to store the data from the API: 
-        products=[]
+
+        # Initialize empty list to store the data from the API:
+        products = []
 
         req = requests.get(API_URL, params=self.parameters())
 
         # output of request as a json file
         req_output = req.json()
-        
+
         for prod in req_output["products"]:
             products.append(prod)
             print(prod.get("product_name_fr", ""))
-                  
+
         sql_list = []
         insert_cat = "INSERT INTO category (`name`) VALUES ('{}');"
         insert_prod = """INSERT INTO product (`name`, \
