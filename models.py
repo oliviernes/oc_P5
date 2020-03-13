@@ -161,30 +161,32 @@ class Category:
     def __init__(self, cat_name):
         self.name = cat_name
 
-    def parameters(self, page):
+    def parameters(self):
 
         search_param = {
             "search_terms": self.name,
             "search_tag": "categories_tag",
             "sort_by": "unique_scans_n",
-            "page_size": 10,
+            "page_size": 1000,
             "json": 1,
-            "page": page,
         }
 
         return search_param
 
     def input_data(self, db):
+       
+        # Initialize empty list to store the data from the API: 
+        products=[]
 
-        # initialize to page 1 of search result
-        page = 1
-        req = requests.get(API_URL, params=self.parameters(page))
+        req = requests.get(API_URL, params=self.parameters())
 
         # output of request as a json file
         req_output = req.json()
-        # list of product of the output
-        products_output = req_output["products"]
-
+        
+        for prod in req_output["products"]:
+            products.append(prod)
+            print(prod.get("product_name_fr", ""))
+                  
         sql_list = []
         insert_cat = "INSERT INTO category (`name`) VALUES ('{}');"
         insert_prod = """INSERT INTO product (`name`, \
@@ -192,19 +194,19 @@ class Category:
         SELECT "{name}", "{nutrition_grades}", "{energy_100}", \
         id AS category_id FROM category WHERE name = "{cat}";"""
 
-        params = self.parameters(page)
+        params = self.parameters()
 
         # insert category
         sql_list.append(insert_cat.format(params["search_terms"]))
 
         # insert products
 
-        for prod in req_output["products"]:
+        for prod in products:
             sql_list.append(
                 insert_prod.format(
                     name=prod.get("product_name_fr", ""),
                     nutrition_grades=prod.get("nutrition_grades", ""),
-                    energy_100=prod["nutriments"]["energy_100g"],
+                    energy_100=prod["nutriments"].get("energy_100g", ""),
                     cat=params["search_terms"],
                 )
             )
