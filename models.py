@@ -216,7 +216,6 @@ class Category:
 
         try:
             for command in sql_list:
-                # ~ print(command)
                 cursor.execute(command)
             cursor.close()
         except mysql.connector.Error as error:

@@ -5,12 +5,14 @@ import os
 import view
 from models import Db
 
+
 database = Db()
 
 
 def substitution(substitutes):
 
     selection = [(1, 1), (2, 2)]
+
     if len(substitutes[0]) > 0:
         answer = check_input(
             "\nSome substitutes are available. Do you \
@@ -57,7 +59,7 @@ def check_input(question, records):
             try:
                 float(num)
                 num = input(
-                    "Input is an float number. You must enter an \
+                    "Input is a float number. You must enter an \
 interger number. Please, try again: "
                 )
             except ValueError:
