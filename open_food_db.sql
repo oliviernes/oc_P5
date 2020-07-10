@@ -9,6 +9,8 @@ CREATE TABLE product (
                 name VARCHAR(150) NOT NULL,
                 nutrition_grades VARCHAR(1) NOT NULL,
                 energy_100 SMALLINT NOT NULL,
+                purchase_places VARCHAR(200) NOT NULL,
+                url VARCHAR(300) NOT NULL,
                 category_id INT NOT NULL,
                 substitute_id INT,
                 PRIMARY KEY (id)
