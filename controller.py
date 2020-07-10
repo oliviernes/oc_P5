@@ -13,7 +13,9 @@ def substitution(substitutes):
 
     selection = [(1, 1), (2, 2)]
 
-    if len(substitutes[0]) > 0:
+    if len(substitutes[0]) == 0:
+        print("There is no substitutes recorded")
+    elif len(substitutes[0]) > 0:
         answer = check_input(
             "\nSome substitutes are available. Do you \
 want to visit them?\n\n1:no\n2:yes\n\nYour answer: ",
