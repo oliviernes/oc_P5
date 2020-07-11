@@ -27,7 +27,7 @@ def display_category_product(pick, records_cat, records_prod):
     """Cleaning of the product's list:"""
     records_prod_dirty = []
     for row in records_prod:
-        records_prod_dirty.append(row[:4])
+        records_prod_dirty.append(row[:6])
 
     records_prod = [prod for prod in records_prod_dirty if all(prod)]
 
@@ -75,8 +75,8 @@ choose a product with more or less energy. The list is sorted by \
 
     for idx, val in enumerate(sorted_by_energy):
         if val[0] in selected:
-            for i in range(4):
-                if i < 3:
+            for i in range(6):
+                if i != 3:
                     print(val[i], " ", end="")
                 else:
                     if val[3] > selected_energy:
