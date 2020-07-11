@@ -144,8 +144,8 @@ database 'foobar'
         self.records_prod = cursor.fetchall()
         self.substitutes = []
         for prod in self.records_prod:
-            if prod[5] is not None:
-                self.substitutes.append((prod[0], prod[5]))
+            if prod[7] is not None:
+                self.substitutes.append((prod[0], prod[7]))
 
         return self.substitutes, self.records_prod
 

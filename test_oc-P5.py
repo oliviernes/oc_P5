@@ -41,7 +41,7 @@ def test_get_infos_product():
     database = Db()
     rec_prod = database.get_infos_product(2)
     for prod in rec_prod:
-        assert prod[4] == 2
+        assert prod[6] == 2
 
 
 def test_cleaning_product():
