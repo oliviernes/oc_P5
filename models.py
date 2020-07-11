@@ -190,9 +190,10 @@ class Category:
         sql_list = []
         insert_cat = "INSERT INTO category (`name`) VALUES ('{}');"
         insert_prod = """INSERT INTO product (`name`, \
-        `nutrition_grades`, `energy_100`, `category_id`) \
-        SELECT "{name}", "{nutrition_grades}", "{energy_100}", \
-        id AS category_id FROM category WHERE name = "{cat}";"""
+        `nutrition_grades`, `energy_100`, `stores`, `url`, \
+        `category_id`) SELECT "{name}", "{nutrition_grades}", \
+        "{energy_100}", "{stores}", "{url}", id AS category_id \
+        FROM category WHERE name = "{cat}";"""
 
         params = self.parameters()
 
@@ -207,6 +208,8 @@ class Category:
                     name=prod.get("product_name_fr", ""),
                     nutrition_grades=prod.get("nutrition_grades", ""),
                     energy_100=prod["nutriments"].get("energy_100g", ""),
+                    stores=prod.get("stores", ""),
+                    url=prod.get("url", ""),
                     cat=params["search_terms"],
                 )
             )
