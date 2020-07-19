@@ -2,9 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import os
-import view
 from models import Db
-
+from view import Display
 
 database = Db()
 
@@ -74,8 +73,10 @@ interger number. Please, try again: "
 
 
 def cli():
-
-    view.greeting()
+    
+    display = Display()
+    
+    display.greeting()
 
     continu = True
 
@@ -87,7 +88,7 @@ def cli():
 
         records_cat = database.get_infos_category()
 
-        view.display_categories(records_cat)
+        display.display_categories(records_cat)
 
         choice = check_input(
             "\nChoose the index of one of the categories:\
@@ -99,7 +100,7 @@ def cli():
 
         records_prod = database.get_infos_product(choice)
 
-        records_prod = view.display_category_product(choice, records_cat, records_prod)
+        records_prod = display.display_category_product(choice, records_cat, records_prod)
 
         choice_prod = check_input(
             "\nChoose the index of one of the products: \
@@ -109,7 +110,7 @@ def cli():
 
         os.system("clear")
 
-        records_prod = view.display_products(choice_prod, records_prod)
+        records_prod = display.display_products(choice_prod, records_prod)
 
         choice_subs = check_input(
             "\nChoose the index of a product to \

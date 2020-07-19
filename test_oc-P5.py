@@ -1,7 +1,7 @@
 import pytest
-import view
 from config import DB_CONF
 from models import Db
+from view import Display
 
 ### Connexion to the db:
 
@@ -46,6 +46,7 @@ def test_get_infos_product():
 
 def test_cleaning_product():
     database = Db()
+    display = Display()
     rec_cat = database.get_infos_category()
     rec_prod = [
         (11, "", "b", 387, 2),
@@ -59,7 +60,7 @@ def test_cleaning_product():
         (19, "Yaourt à la grecque nature", "c", 414, "Auchan", "https://fr-en.openfoodfacts.org/product/7622210601988/yahourt", 2),
         (20, "Gourmand et végétal au lait de coco", "c", 456, "", "https", 2),
     ]
-    records_prod = view.display_category_product(3, rec_cat, rec_prod)
+    records_prod = display.display_category_product(3, rec_cat, rec_prod)
     for val in records_prod:
         for col in val:
             assert col != ""
@@ -67,6 +68,7 @@ def test_cleaning_product():
 
 def test_display_products():
     database = Db()
+    display = Display()
     rec_prod = [
         (31, "Ice Tea saveur Pêche", "d", 82, "Auchan", "https://fr-en.openfoodfacts.org/product/7622210601988/yahourt"),
         (32, "Ice Tea pêche", "d", 82, "Auchan", "https://fr-en.openfoodfacts.org/product/7622210601988/yahourt"),
@@ -79,6 +81,6 @@ def test_display_products():
         (39, "Sucre glace", "d", 1674, "Auchan", "https://fr-en.openfoodfacts.org/product/7622210601988/yahourt"),
         (40, "fuze tea pêche intense (thé glacé)", "d", 79, "Auchan", "https://fr-en.openfoodfacts.org/product/7622210601988/yahourt"),
     ]
-    prod_displayed = view.display_products(38, rec_prod)
+    prod_displayed = display.display_products(38, rec_prod)
     for prod in prod_displayed:
         assert prod[0] != 38
