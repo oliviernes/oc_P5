@@ -5,7 +5,7 @@ import mysql.connector
 from mysql.connector import errorcode
 import requests
 import json
-from config import DB_CONF, API_URL
+from config import DB_CONF, API_URL, INSERT_CAT, INSERT_PROD
 
 ################
 #   DATABASE   #
@@ -178,23 +178,17 @@ class Category:
             print(prod.get("product_name_fr", ""))
 
         sql_list = []
-        insert_cat = "INSERT INTO category (`name`) VALUES ('{}');"
-        insert_prod = """INSERT INTO product (`name`, \
-        `nutrition_grades`, `energy_100`, `stores`, `url`, \
-        `category_id`) SELECT "{name}", "{nutrition_grades}", \
-        "{energy_100}", "{stores}", "{url}", id AS category_id \
-        FROM category WHERE name = "{cat}";"""
 
         params = self.parameters()
 
         # insert category
-        sql_list.append(insert_cat.format(params["search_terms"]))
+        sql_list.append(INSERT_CAT.format(params["search_terms"]))
 
         # insert products
 
         for prod in products:
             sql_list.append(
-                insert_prod.format(
+                INSERT_PROD.format(
                     name=prod.get("product_name_fr", ""),
                     nutrition_grades=prod.get("nutrition_grades", ""),
                     energy_100=prod["nutriments"].get("energy_100g", ""),
