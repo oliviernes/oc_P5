@@ -1,6 +1,5 @@
 """view file"""
 
-from models import Db
 from colorama import Fore, Style
 
 

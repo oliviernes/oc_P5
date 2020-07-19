@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import json
 import mysql.connector
 from mysql.connector import errorcode
 import requests
-import json
 from config import DB_CONF, API_URL, INSERT_CAT, INSERT_PROD
 
 ################
@@ -112,25 +112,25 @@ database 'foobar'
     def get_infos_category(self):
         """ Get infos from the category table """
 
-        sql_select_Query = "select * from category"
-        self.cursor.execute(sql_select_Query)
+        sql_select_query = "select * from category"
+        self.cursor.execute(sql_select_query)
         self.records_cat = self.cursor.fetchall()
         return self.records_cat
 
     def get_infos_product(self, choice):
         """ Get infos from the category table """
 
-        sql_select_Query = f"select * from product where category_id=\
+        sql_select_query = f"select * from product where category_id=\
         {choice}"
-        self.cursor.execute(sql_select_Query)
+        self.cursor.execute(sql_select_query)
         self.records_prod = self.cursor.fetchall()
         return self.records_prod
 
     def get_substitute(self):
         """ Get a tuples' list of substitute products"""
 
-        sql_select_Query = "select * from product"
-        self.cursor.execute(sql_select_Query)
+        sql_select_query = "select * from product"
+        self.cursor.execute(sql_select_query)
         self.records_prod = self.cursor.fetchall()
         self.substitutes = []
         for prod in self.records_prod:

@@ -7,8 +7,8 @@ from view import Display
 
 database = Db()
 
-class Control:
 
+class Control:
     def __init__(self):
 
         self.selection = [(1, 1), (2, 2)]
@@ -33,7 +33,6 @@ want to visit them?\n\n1:no\n2:yes\n\nYour answer: ",
                             subs_name = prods[1]
                     print("\n", prod_name, " can be replaced by ", subs_name)
         print("\nHere are the categories available for screening:\n")
-
 
     def check_input(self, question, records):
 
@@ -74,8 +73,8 @@ interger number. Please, try again: "
 
         return val
 
-class Command:
 
+class Command:
     def cli(self):
 
         display = Display()
@@ -83,9 +82,9 @@ class Command:
         display.greeting()
 
         continu = True
-        
+
         control = Control()
-        
+
         while continu:
 
             database = Db()
@@ -99,8 +98,7 @@ class Command:
             display.display_categories(records_cat)
 
             choice = control.check_input(
-                "\nChoose the index of one of the categories:",
-                records_cat,
+                "\nChoose the index of one of the categories:", records_cat,
             )
 
             os.system("clear")
@@ -112,8 +110,7 @@ class Command:
             )
 
             choice_prod = control.check_input(
-                "\nChoose the index of one of the products:",
-                records_prod,
+                "\nChoose the index of one of the products:", records_prod,
             )
 
             os.system("clear")
@@ -146,8 +143,7 @@ Your answer: ",
 
             if choice == 1:
                 break
-            else:
-                pass
+
 
 command = Command()
 
