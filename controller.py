@@ -82,6 +82,8 @@ def cli():
 
     while continu:
 
+        database = Db()
+
         substitutes = database.get_substitute()
 
         substitution(substitutes)

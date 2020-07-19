@@ -48,7 +48,8 @@ database 'foobar'
             else:
                 print(err)
         else:
-            pass
+            self.connection = self.cnx
+            self.cursor = self.connection.cursor()
 
     def make_sql_list(self, sql_file=DB_CONF["file"]):
         """Make a list of sql commands"""
@@ -64,9 +65,6 @@ database 'foobar'
         """Initialize the database"""
 
         sql_list = self.make_sql_list()
-        # ~ Open cursor linked to DB (self)
-        connection = self.cnx
-        cursor = connection.cursor()
 
         length = len(sql_list)
         n = 0
@@ -83,7 +81,7 @@ database 'foobar'
                 if n < length - 1:
                     print(f"Creating table:{table} -", end="")
 
-                cursor.execute(sql_command + ";")
+                self.cursor.execute(sql_command + ";")
             except mysql.connector.Error as err:
                 if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
                     print("Table already exists.")
@@ -97,11 +95,9 @@ database 'foobar'
 
         query = f"UPDATE product SET substitute_id={substitute}\
  WHERE id={product};"
-        connection = self.cnx
-        cursor = connection.cursor()
-        cursor.execute(query)
-        connection.commit()
-        cursor.close()
+        self.cursor.execute(query)
+        self.connection.commit()
+        self.cursor.close()
 
     def drop_table(self, table):
         """ DROP TABLE Products"""
@@ -117,10 +113,8 @@ database 'foobar'
         """ Get infos from the category table """
 
         sql_select_Query = "select * from category"
-        connection = self.cnx
-        cursor = connection.cursor()
-        cursor.execute(sql_select_Query)
-        self.records_cat = cursor.fetchall()
+        self.cursor.execute(sql_select_Query)
+        self.records_cat = self.cursor.fetchall()
         return self.records_cat
 
     def get_infos_product(self, choice):
@@ -128,20 +122,16 @@ database 'foobar'
 
         sql_select_Query = f"select * from product where category_id=\
         {choice}"
-        connection = self.cnx
-        cursor = connection.cursor()
-        cursor.execute(sql_select_Query)
-        self.records_prod = cursor.fetchall()
+        self.cursor.execute(sql_select_Query)
+        self.records_prod = self.cursor.fetchall()
         return self.records_prod
 
     def get_substitute(self):
         """ Get a tuples' list of substitute products"""
 
         sql_select_Query = "select * from product"
-        connection = self.cnx
-        cursor = connection.cursor()
-        cursor.execute(sql_select_Query)
-        self.records_prod = cursor.fetchall()
+        self.cursor.execute(sql_select_Query)
+        self.records_prod = self.cursor.fetchall()
         self.substitutes = []
         for prod in self.records_prod:
             if prod[7] is not None:
