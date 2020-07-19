@@ -37,7 +37,6 @@ healthier products."
 
         return records_prod
 
-
     def display_products(self, pick, records_prod):
 
         selected = []

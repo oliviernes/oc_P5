@@ -73,9 +73,9 @@ interger number. Please, try again: "
 
 
 def cli():
-    
+
     display = Display()
-    
+
     display.greeting()
 
     continu = True
@@ -100,7 +100,9 @@ def cli():
 
         records_prod = database.get_infos_product(choice)
 
-        records_prod = display.display_category_product(choice, records_cat, records_prod)
+        records_prod = display.display_category_product(
+            choice, records_cat, records_prod
+        )
 
         choice_prod = check_input(
             "\nChoose the index of one of the products: \
