@@ -1,6 +1,6 @@
 import pytest
 from config import DB_CONF
-from models import Db
+from models import Db, ProductsCleaned
 from view import Display
 
 ### Connexion to the db:
@@ -45,9 +45,6 @@ def test_get_infos_product():
 
 
 def test_cleaning_product():
-    database = Db()
-    display = Display()
-    rec_cat = database.get_infos_category()
     rec_prod = [
         (11, "", "b", 387, 2),
         (12, "", "a", 188, 2),
@@ -68,8 +65,10 @@ def test_cleaning_product():
         ),
         (20, "Gourmand et végétal au lait de coco", "c", 456, "", "https", 2),
     ]
-    records_prod = display.display_category_product(3, rec_cat, rec_prod)
-    for val in records_prod:
+
+    records_prod_cleaned = ProductsCleaned().clean(rec_prod)
+
+    for val in records_prod_cleaned:
         for col in val:
             assert col != ""
 
