@@ -101,8 +101,6 @@ class Command:
                 "\nChoose the index of one of the categories:", records_cat,
             )
 
-            os.system("clear")
-
             records_prod = database.get_infos_product(choice)
 
             records_prod = display.display_category_product(
@@ -112,8 +110,6 @@ class Command:
             choice_prod = control.check_input(
                 "\nChoose the index of one of the products:", records_prod,
             )
-
-            os.system("clear")
 
             records_prod = display.display_products(choice_prod, records_prod)
 
