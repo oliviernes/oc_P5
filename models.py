@@ -209,6 +209,7 @@ class Category:
             print(f"Failed to insert record to MySQL table: {error}")
             print(error)
 
+
 ###########################
 #       Cleaning          #
 ###########################
@@ -216,6 +217,7 @@ class Category:
 
 class ProductsCleaned:
     """Return a list of products without missing values"""
+
     def clean(self, records_prod):
         """Cleaning of the product's list:"""
         records_prod_dirty = []

@@ -105,9 +105,7 @@ class Command:
 
             records_prod_cleaned = ProductsCleaned().clean(records_prod)
 
-            display.display_category_product(
-                choice, records_cat, records_prod_cleaned
-            )
+            display.display_category_product(choice, records_cat, records_prod_cleaned)
 
             choice_prod = control.check_input(
                 "\nChoose the index of one of the products:", records_prod_cleaned,
@@ -145,4 +143,5 @@ Your answer: ",
 
 command = Command()
 
-command.cli()
+if __name__ == '__main__':
+    command.cli()
