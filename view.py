@@ -24,17 +24,8 @@ healthier products."
 
         print("\nYou chose the category", records_cat[pick - 1][1], ":\n")
 
-        """Cleaning of the product's list:"""
-        records_prod_dirty = []
-        for row in records_prod:
-            records_prod_dirty.append(row[:6])
-
-        records_prod = [prod for prod in records_prod_dirty if all(prod)]
-
         for row in records_prod:
             print(row[0], ":", row[1], "(", row[2], ")")
-
-        return records_prod
 
     def display_products(self, pick, records_prod):
 

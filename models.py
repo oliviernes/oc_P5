@@ -208,3 +208,20 @@ class Category:
         except mysql.connector.Error as error:
             print(f"Failed to insert record to MySQL table: {error}")
             print(error)
+
+###########################
+#       Cleaning          #
+###########################
+
+class ProductsCleaned:
+    """Return a list of products without missing values"""
+    def clean(self, records_prod):
+        """Cleaning of the product's list:"""
+        records_prod_dirty = []
+        for row in records_prod:
+            records_prod_dirty.append(row[:6])
+
+        records_prod = [prod for prod in records_prod_dirty if all(prod)]
+
+        return records_prod
+

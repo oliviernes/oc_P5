@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-from models import Db
+from models import Db, ProductsCleaned
 from view import Display
 
 database = Db()
@@ -103,15 +103,17 @@ class Command:
 
             records_prod = database.get_infos_product(choice)
 
-            records_prod = display.display_category_product(
-                choice, records_cat, records_prod
+            records_prod_cleaned = ProductsCleaned().clean(records_prod)
+
+            display.display_category_product(
+                choice, records_cat, records_prod_cleaned
             )
 
             choice_prod = control.check_input(
-                "\nChoose the index of one of the products:", records_prod,
+                "\nChoose the index of one of the products:", records_prod_cleaned,
             )
 
-            records_prod = display.display_products(choice_prod, records_prod)
+            records_prod = display.display_products(choice_prod, records_prod_cleaned)
 
             choice_subs = control.check_input(
                 "\nChoose the index of a product to \
