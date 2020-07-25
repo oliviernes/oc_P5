@@ -213,6 +213,7 @@ class Category:
 #       Cleaning          #
 ###########################
 
+
 class ProductsCleaned:
     """Return a list of products without missing values"""
     def clean(self, records_prod):
@@ -224,4 +225,3 @@ class ProductsCleaned:
         records_prod = [prod for prod in records_prod_dirty if all(prod)]
 
         return records_prod
-
