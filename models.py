@@ -227,3 +227,7 @@ class ProductsCleaned:
         records_prod = [prod for prod in records_prod_dirty if all(prod)]
 
         return records_prod
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
