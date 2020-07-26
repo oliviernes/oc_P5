@@ -27,7 +27,7 @@ The team noticed that their users wanted to change their diet but were not sure 
 
 # Installation
 
-* get the code: git clone git@github.com:oliviernes/MacGyver.git
+* get the code: git clone git@github.com:oliviernes/oc_P5.git
 * create a dedicated virtualenv: virtualenv -p python3 .venv; source .venv/bin/activate
 * adds dependencies: pip install -r requirements.txt
 
