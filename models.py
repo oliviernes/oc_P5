@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import json
 import mysql.connector
 from mysql.connector import errorcode
 import requests
@@ -67,10 +66,10 @@ database 'foobar'
         sql_list = self.make_sql_list()
 
         length = len(sql_list)
-        n = 0
+        counter = 0
 
         for sql_command in sql_list:
-            n += 1
+            counter += 1
             try:
                 table = ""
                 for letter in sql_command[13:]:
@@ -78,7 +77,7 @@ database 'foobar'
                     if table[-2:] == " (":
                         table = table[:-2]
                         break
-                if n < length - 1:
+                if counter < length - 1:
                     print(f"Creating table:{table} -", end="")
 
                 self.cursor.execute(sql_command + ";")
@@ -88,10 +87,11 @@ database 'foobar'
                 else:
                     print(err.msg)
             else:
-                if n < length - 1:
+                if counter < length - 1:
                     print("OK")
 
     def update_data(self, product, substitute):
+        """Update de the database with the chosen substitute"""
 
         query = f"UPDATE product SET substitute_id={substitute}\
  WHERE id={product};"
@@ -152,7 +152,7 @@ class Category:
         self.name = cat_name
 
     def parameters(self):
-
+        """Set the search parameters"""
         search_param = {
             "search_terms": self.name,
             "search_tag": "categories_tag",
@@ -163,7 +163,8 @@ class Category:
 
         return search_param
 
-    def input_data(self, db):
+    def input_data(self, database):
+        """Input data in the database with data from the API"""
 
         # Initialize empty list to store the data from the API:
         products = []
@@ -198,7 +199,7 @@ class Category:
                 )
             )
 
-        connection = db.cnx
+        connection = database.cnx
         cursor = connection.cursor()
 
         try:
@@ -228,6 +229,8 @@ class ProductsCleaned:
 
         return records_prod
 
+
 if __name__ == "__main__":
     import doctest
+
     doctest.testmod()

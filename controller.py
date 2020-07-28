@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import os
 from models import Db, ProductsCleaned
 from view import Display
 
-database = Db()
-
 
 class Control:
+    """To control user's inputs and display recorded substitutes"""
+
     def __init__(self):
 
         self.selection = [(1, 1), (2, 2)]
@@ -75,11 +74,11 @@ interger number. Please, try again: "
 
 
 class Command:
+    """Allows to follow user's path"""
+
     def cli(self):
 
-        display = Display()
-
-        display.greeting()
+        Display.greeting()
 
         continu = True
 
@@ -95,7 +94,7 @@ class Command:
 
             records_cat = database.get_infos_category()
 
-            display.display_categories(records_cat)
+            Display.display_categories(records_cat)
 
             choice = control.check_input(
                 "\nChoose the index of one of the categories:", records_cat,
@@ -105,13 +104,13 @@ class Command:
 
             records_prod_cleaned = ProductsCleaned().clean(records_prod)
 
-            display.display_category_product(choice, records_cat, records_prod_cleaned)
+            Display.display_category_product(choice, records_cat, records_prod_cleaned)
 
             choice_prod = control.check_input(
                 "\nChoose the index of one of the products:", records_prod_cleaned,
             )
 
-            records_prod = display.display_products(choice_prod, records_prod_cleaned)
+            records_prod = Display.display_products(choice_prod, records_prod_cleaned)
 
             choice_subs = control.check_input(
                 "\nChoose the index of a product to \
@@ -143,5 +142,5 @@ Your answer: ",
 
 command = Command()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     command.cli()
