@@ -6,20 +6,23 @@ from colorama import Fore, Style
 class Display:
     "To display informations on the terminal"
 
-    def greeting(self):
+    @staticmethod
+    def greeting():
         """ function to greet app's users"""
         print(
             "Welcome in this app:\n\nThis app help users to look for \
 healthier products."
         )
 
-    def display_categories(self, records):
+    @staticmethod
+    def display_categories(records):
         """display available categories"""
 
         for row in records:
             print(row[0], ":", row[1])
 
-    def display_category_product(self, pick, records_cat, records_prod):
+    @staticmethod
+    def display_category_product(pick, records_cat, records_prod):
         """display products of the category chosen"""
 
         print("\nYou chose the category", records_cat[pick - 1][1], ":\n")
@@ -27,8 +30,9 @@ healthier products."
         for row in records_prod:
             print(row[0], ":", row[1], "(", row[2], ")")
 
-    def display_products(self, pick, records_prod):
-
+    @staticmethod
+    def display_products(pick, records_prod):
+        """Display available substitutes of a product"""
         selected = []
 
         for idx, val in enumerate(records_prod):
