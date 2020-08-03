@@ -103,11 +103,8 @@ database 'foobar'
         """ DROP TABLE Products"""
 
         query = f"DROP TABLE IF EXISTS {table};"
-        connection = self.cnx
-        cursor = connection.cursor()
-        cursor.execute(query)
-        connection.commit()
-        cursor.close()
+        self.cursor.execute(query)
+        self.connection.commit()
 
     def get_infos_category(self):
         """ Get infos from the category table """
