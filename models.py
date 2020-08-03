@@ -96,7 +96,6 @@ database 'foobar'
         query = f"UPDATE product SET substitute_id={substitute}\
  WHERE id={product};"
         self.cursor.execute(query)
-        self.connection.commit()
         self.cursor.close()
 
     def drop_table(self, table):
@@ -104,7 +103,6 @@ database 'foobar'
 
         query = f"DROP TABLE IF EXISTS {table};"
         self.cursor.execute(query)
-        self.connection.commit()
 
     def get_infos_category(self):
         """ Get infos from the category table """
