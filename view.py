@@ -2,6 +2,7 @@
 
 from colorama import Fore, Style
 
+import pdb
 
 class Display:
     "To display informations on the terminal"
@@ -66,7 +67,23 @@ or less:\n"
         """Sort products by their energy"""
         sorted_by_energy = sorted(records_prod, key=lambda tup: tup[3])
 
+        selected_prods=[]
+        
+        "Add product's id picked in the selected products' list"
+        selected.append(records_prod[index][0])
+        
         for idx, val in enumerate(sorted_by_energy):
+            if val[0] in selected:
+                selected_prods.append(val)
+        
+        for idx, val in enumerate(selected_prods):
+            if val[3] == selected_energy and len(selected_prods) > 20:
+                selected_prods = selected_prods[idx-10:idx+10]
+                selected_prods.remove(val)
+            elif val[3] == selected_energy and len(selected_prods) <= 20:
+                selected_prods.remove(val)
+
+        for idx, val in enumerate(selected_prods):
             if val[0] in selected:
                 for i in range(6):
                     if i != 3:
