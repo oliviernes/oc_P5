@@ -96,7 +96,6 @@ database 'foobar'
         query = f"UPDATE product SET substitute_id={substitute}\
  WHERE id={product};"
         self.cursor.execute(query)
-        #~ self.cursor.close()
 
     def drop_table(self, table):
         """ DROP TABLE Products"""
