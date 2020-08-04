@@ -35,6 +35,8 @@ healthier products."
         for row in sampling:
             print(row[0], ":", row[1], "(", row[2], ")")
 
+        return sampling
+
     @staticmethod
     def display_products(pick, records_prod):
         """Display available substitutes of a product"""
