@@ -69,12 +69,13 @@ or less:\n"
 
         """Sort products by their energy"""
         sorted_by_energy = sorted(selected, key=lambda tup: tup[3])
-        
+
         for idx, val in enumerate(sorted_by_energy):
-            if val[3] == selected_energy and len(sorted_by_energy) > 20:
-                sorted_by_energy = sorted_by_energy[idx-10:idx+10]
-                sorted_by_energy.remove(val)
-            elif val[3] == selected_energy and len(sorted_by_energy) <= 20:
+            if val[3] == selected_energy:
+                mini = idx - 10
+                if mini < 0:
+                    mini = 0
+                sorted_by_energy = sorted_by_energy[mini:idx+10]
                 sorted_by_energy.remove(val)
 
         for idx, val in enumerate(sorted_by_energy):
