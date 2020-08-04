@@ -104,7 +104,9 @@ class Command:
 
             records_prod_cleaned = ProductsCleaned().clean(records_prod)
 
-            sampling = Display.display_category_product(choice, records_cat, records_prod_cleaned)
+            sampling = Display.display_category_product(
+                choice, records_cat, records_prod_cleaned
+            )
 
             choice_prod = control.check_input(
                 "\nChoose the index of one of the products:", sampling,

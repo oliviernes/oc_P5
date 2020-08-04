@@ -4,7 +4,6 @@ import random
 
 from colorama import Fore, Style
 
-import pdb
 
 class Display:
     "To display informations on the terminal"
