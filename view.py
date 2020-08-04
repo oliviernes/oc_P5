@@ -70,12 +70,13 @@ or less:\n"
         """Sort products by their energy"""
         sorted_by_energy = sorted(selected, key=lambda tup: tup[3])
 
+        """Select 10 products with similar energy and same nutrisocre"""
         for idx, val in enumerate(sorted_by_energy):
             if val[3] == selected_energy:
-                mini = idx - 10
+                mini = idx - 5
                 if mini < 0:
                     mini = 0
-                sorted_by_energy = sorted_by_energy[mini:idx+10]
+                sorted_by_energy = sorted_by_energy[mini:idx+5]
                 sorted_by_energy.remove(val)
 
         for idx, val in enumerate(sorted_by_energy):
