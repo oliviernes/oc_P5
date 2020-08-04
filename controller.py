@@ -76,31 +76,32 @@ interger number. Please, try again: "
 class Command:
     """Allows to follow user's path"""
 
+    def __init__(self):
+
+        self.database = Db()
+        self.control = Control()
+
     def cli(self):
 
         Display.greeting()
 
         continu = True
 
-        control = Control()
-
         while continu:
 
-            database = Db()
+            substitutes = self.database.get_substitute()
 
-            substitutes = database.get_substitute()
+            self.control.substitution(substitutes)
 
-            control.substitution(substitutes)
-
-            records_cat = database.get_infos_category()
+            records_cat = self.database.get_infos_category()
 
             Display.display_categories(records_cat)
 
-            choice = control.check_input(
+            choice = self.control.check_input(
                 "\nChoose the index of one of the categories:", records_cat,
             )
 
-            records_prod = database.get_infos_product(choice)
+            records_prod = self.database.get_infos_product(choice)
 
             records_prod_cleaned = ProductsCleaned().clean(records_prod)
 
@@ -108,31 +109,31 @@ class Command:
                 choice, records_cat, records_prod_cleaned
             )
 
-            choice_prod = control.check_input(
+            choice_prod = self.control.check_input(
                 "\nChoose the index of one of the products:", sampling,
             )
 
             records_prod = Display.display_products(choice_prod, records_prod_cleaned)
 
-            choice_subs = control.check_input(
+            choice_subs = self.control.check_input(
                 "\nChoose the index of a product to \
 substitute: ",
                 records_prod,
             )
 
             selec = [(1, 1), (2, 2)]
-            choice = control.check_input(
+            choice = self.control.check_input(
                 "\nDo you want to register this substitute in the\
  database?\n\n1:no\n2:yes\n\nYour answer: ",
                 selec,
             )
 
             if choice == 2:
-                database.update_data(choice_prod, choice_subs)
+                self.database.update_data(choice_prod, choice_subs)
             else:
                 pass
 
-            choice = control.check_input(
+            choice = self.control.check_input(
                 "\nDo you want to search other products?\n\n1:no\n2:yes\n\n\
 Your answer: ",
                 selec,
