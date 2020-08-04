@@ -42,12 +42,12 @@ healthier products."
 
         for row in records_prod:
             if row[2] < records_prod[index][2]:
-                selected.append(row[0])
+                selected.append(row)
 
         if len(selected) == 0:
             for row in records_prod:
                 if row[2] == records_prod[index][2] and row[0] != pick:
-                    selected.append(row[0])
+                    selected.append(row)
             print(
                 "\nNo healthier product available. However, you can \
 choose a product with more or less energy. The list is sorted by \
@@ -64,27 +64,20 @@ or less:\n"
 
         selected_energy = records_prod[index][3]
 
-        """Sort products by their energy"""
-        sorted_by_energy = sorted(records_prod, key=lambda tup: tup[3])
-
-        selected_prods=[]
-        
         "Add product's id picked in the selected products' list"
-        selected.append(records_prod[index][0])
+        selected.append(records_prod[index])
+
+        """Sort products by their energy"""
+        sorted_by_energy = sorted(selected, key=lambda tup: tup[3])
         
         for idx, val in enumerate(sorted_by_energy):
-            if val[0] in selected:
-                selected_prods.append(val)
-        
-        for idx, val in enumerate(selected_prods):
-            if val[3] == selected_energy and len(selected_prods) > 20:
-                selected_prods = selected_prods[idx-10:idx+10]
-                selected_prods.remove(val)
-            elif val[3] == selected_energy and len(selected_prods) <= 20:
-                selected_prods.remove(val)
+            if val[3] == selected_energy and len(sorted_by_energy) > 20:
+                sorted_by_energy = sorted_by_energy[idx-10:idx+10]
+                sorted_by_energy.remove(val)
+            elif val[3] == selected_energy and len(sorted_by_energy) <= 20:
+                sorted_by_energy.remove(val)
 
-        for idx, val in enumerate(selected_prods):
-            if val[0] in selected:
+        for idx, val in enumerate(sorted_by_energy):
                 for i in range(6):
                     if i != 3:
                         print(val[i], " ", end="")
@@ -97,7 +90,4 @@ or less:\n"
                             print(Style.RESET_ALL)
                 print("\n")
 
-        """Remove products not selected:"""
-        records_prod = [prod for prod in records_prod if prod[0] in selected]
-
-        return records_prod
+        return sorted_by_energy
