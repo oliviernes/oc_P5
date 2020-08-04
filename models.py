@@ -152,7 +152,7 @@ class Category:
             "search_terms": self.name,
             "search_tag": "categories_tag",
             "sort_by": "unique_scans_n",
-            "page_size": 100,
+            "page_size": 1000,
             "json": 1,
         }
 

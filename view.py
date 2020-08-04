@@ -1,9 +1,10 @@
 """view file"""
 
+import random
+
 from colorama import Fore, Style
 
 import pdb
-
 
 class Display:
     "To display informations on the terminal"
@@ -29,7 +30,9 @@ healthier products."
 
         print("\nYou chose the category", records_cat[pick - 1][1], ":\n")
 
-        for row in records_prod[0:49]:
+        sampling = random.choices(records_prod, k=30)
+
+        for row in sampling:
             print(row[0], ":", row[1], "(", row[2], ")")
 
     @staticmethod
