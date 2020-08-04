@@ -28,7 +28,7 @@ healthier products."
 
         print("\nYou chose the category", records_cat[pick - 1][1], ":\n")
 
-        for row in records_prod:
+        for row in records_prod[0:49]:
             print(row[0], ":", row[1], "(", row[2], ")")
 
     @staticmethod
@@ -79,6 +79,7 @@ or less:\n"
                 sorted_by_energy = sorted_by_energy[mini:idx+5]
                 sorted_by_energy.remove(val)
 
+        """Display substitutes with the color of their energy according to their value"""
         for idx, val in enumerate(sorted_by_energy):
                 for i in range(6):
                     if i != 3:
