@@ -140,6 +140,7 @@ Your answer: ",
             )
 
             if choice == 1:
+                self.database.cursor.close()
                 break
 
 
