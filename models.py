@@ -47,8 +47,7 @@ database 'foobar'
             else:
                 print(err)
         else:
-            self.connection = self.cnx
-            self.cursor = self.connection.cursor()
+            self.cursor = self.cnx.cursor()
 
     def make_sql_list(self, sql_file=DB_CONF["file"]):
         """Make a list of sql commands"""
@@ -193,8 +192,7 @@ class Category:
                 )
             )
 
-        connection = database.cnx
-        cursor = connection.cursor()
+        cursor = database.cnx.cursor()
 
         try:
             for command in sql_list:
