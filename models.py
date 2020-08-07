@@ -15,18 +15,6 @@ class Db:
     """Manage the database"""
 
     def __init__(self):
-        """
-        Connect to MySQL Server
-        :Tests:
-        >>> DB_CONF["user"] = 'bob'
-        >>> Db.__init__(Db)
-        Something is wrong with your user name or password
-        >>> DB_CONF['user'] = 'off_user'
-        >>> DB_CONF['db'] = 'foobar'
-        >>> Db.__init__(Db)
-        1044 (42000): Access denied for user 'off_user'@'localhost' to \
-database 'foobar'
-        """
 
         con_conf = {
             "host": DB_CONF["host"],
@@ -213,9 +201,3 @@ class ProductsCleaned:
         records_prod = [prod for prod in records_prod_dirty if all(prod)]
 
         return records_prod
-
-
-if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod()
