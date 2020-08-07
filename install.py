@@ -17,5 +17,5 @@ db.create_tables()
 
 if __name__ == "__main__":
     for cat in CATEGORIES:
-        categorie = models.Category(cat)
-        categorie.input_data(db)
+        category = models.Category(cat)
+        category.input_data(db)
