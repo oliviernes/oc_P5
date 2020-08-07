@@ -51,7 +51,6 @@ database 'foobar'
 
     def make_sql_list(self, sql_file=DB_CONF["file"]):
         """Make a list of sql commands"""
-
         with open(sql_file, "r") as file:
             # Split file in list
             ret = file.read().split(";")
@@ -61,7 +60,6 @@ database 'foobar'
 
     def create_tables(self):
         """Initialize the database"""
-
         sql_list = self.make_sql_list()
 
         length = len(sql_list)
@@ -91,20 +89,17 @@ database 'foobar'
 
     def update_data(self, product, substitute):
         """Update de the database with the chosen substitute"""
-
         query = f"UPDATE product SET substitute_id={substitute}\
- WHERE id={product};"
+         WHERE id={product};"
         self.cursor.execute(query)
 
     def drop_table(self, table):
         """ DROP TABLE Products"""
-
         query = f"DROP TABLE IF EXISTS {table};"
         self.cursor.execute(query)
 
     def get_infos_category(self):
         """ Get infos from the category table """
-
         sql_select_query = "select * from category"
         self.cursor.execute(sql_select_query)
         self.records_cat = self.cursor.fetchall()
@@ -112,7 +107,6 @@ database 'foobar'
 
     def get_infos_product(self, choice):
         """ Get infos from the category table """
-
         sql_select_query = f"select * from product where category_id=\
         {choice}"
         self.cursor.execute(sql_select_query)
@@ -121,7 +115,6 @@ database 'foobar'
 
     def get_substitute(self):
         """ Get a tuples' list of substitute products"""
-
         sql_select_query = "select * from product"
         self.cursor.execute(sql_select_query)
         self.records_prod = self.cursor.fetchall()

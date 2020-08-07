@@ -11,10 +11,8 @@ class Display:
     @staticmethod
     def greeting():
         """ function to greet app's users"""
-        print(
-            "Welcome in this app:\n\nThis app help users to look for \
-healthier products."
-        )
+        message = "This app help users to look for healthier products."
+        print("Welcome in this app:\n\n" + message)
 
     @staticmethod
     def display_categories(records):
@@ -53,18 +51,20 @@ healthier products."
             for row in records_prod:
                 if row[2] == records_prod[index][2] and row[0] != pick:
                     selected.append(row)
+
             print(
-                "\nNo healthier product available. However, you can \
-choose a product with more or less energy. The list is sorted by \
-energy values in kj per 100g or 100mL. The red values are greater \
-than the energy of the product picked or green if equal \
-or less:\n"
+                "\nNo healthier product available. However, you can choose "
+                "a product with more or less energy. The list is sorted by "
+                "energy values in kj per 100g or 100mL. The red values are "
+                "greater than the energy of the product picked or green if "
+                "equal or less:\n"
             )
         else:
             print(
-                "\nHere is a list of healthier products (sorted by their\
- energy values in kj per 100g or 100mL). The red values are greater\
- than the energy of the product picked or green if equal or less:\n"
+                "\nHere is a list of healthier products (sorted by their"
+                " energy values in kj per 100g or 100mL). The red values"
+                " are greater than the energy of the product picked or "
+                "green if equal or less:\n"
             )
 
         selected_energy = records_prod[index][3]
@@ -87,7 +87,8 @@ or less:\n"
         if records_prod[index] in sorted_by_energy:
             sorted_by_energy.remove(records_prod[index])
 
-        """Display substitutes with the color of their energy according to their value"""
+        """Display substitutes with the color of their energy according 
+        to their value"""
         for idx, val in enumerate(sorted_by_energy):
             for i in range(6):
                 if i != 3:

@@ -3,7 +3,7 @@ from config import DB_CONF
 from models import Db, ProductsCleaned
 from view import Display
 
-### Connexion to the db:
+# ### Connexion to the db:
 
 
 def test_connexion1():
